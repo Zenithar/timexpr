@@ -1,0 +1,205 @@
+{
+package parser
+
+type TimeUnit uint32
+
+const (
+    TimeUnitSecond TimeUnit = iota
+    TimeUnitMinute
+    TimeUnitHour
+    TimeUnitDay
+    TimeUnitWeek
+    TimeUnitMonth
+    TimeUnitYear
+)
+
+type Projection uint32
+
+const (
+    ProjectionPast Projection = iota
+    ProjectionFuture
+)
+
+type TimeOffset struct {
+    Projection Projection
+    TimeUnit TimeUnit
+    Number   int64
+}
+
+func (to TimeOffset) Apply(t time.Time) time.Time {
+    // Determine the sign of the offset.
+    sign := int64(-1)
+    if to.Projection == ProjectionFuture {
+        sign = int64(1)
+    }
+
+    // Apply the offset.
+    switch to.TimeUnit {
+    case TimeUnitSecond:
+        return t.Add(time.Duration(sign * to.Number) * time.Second)
+    case TimeUnitMinute:
+        return t.Add(time.Duration(sign * to.Number) * time.Minute)
+    case TimeUnitHour:
+        return t.Add(time.Duration(sign * to.Number) * time.Hour)
+    case TimeUnitDay:
+        return t.AddDate(0, 0, int(sign * to.Number))
+    case TimeUnitWeek:
+        return t.AddDate(0, 0, 7*int(sign * to.Number))
+    case TimeUnitMonth:
+        return t.AddDate(0, int(sign * to.Number), 0)
+    case TimeUnitYear:
+        return t.AddDate(int(sign * to.Number), 0, 0)
+    }
+
+    return t
+}
+
+// Clock is an interface for getting the current time.
+type Clock interface {
+	Now() time.Time
+}
+
+type realClock struct{}
+
+func (realClock) Now() time.Time {
+	return time.Now().UTC()
+}
+
+// Default clock implementation.
+var clock Clock = &realClock{}
+
+// SetClock sets the clock implementation.
+func SetClock(c Clock) {
+	clock = c
+}
+
+}
+
+Input <- 
+    expr:Expression EOF { 
+        return expr, nil 
+    }
+
+Expression <- 
+    ts:Timestamp {
+        return time.Parse("2006-01-02T15:04:05Z", string(c.text))
+    }
+    / "now" {
+        return clock.Now(), nil
+    }
+    / "today" {
+        return clock.Now().Truncate(24 * time.Hour), nil
+    }
+    / "yesterday" {
+        return clock.Now().Truncate(24 * time.Hour).Add(-24 * time.Hour), nil
+    }
+    / "tomorrow" {
+        return clock.Now().Truncate(24 * time.Hour).Add(24 * time.Hour), nil
+    }
+    / rt:RelativeTime {
+        return rt, nil
+    }
+    / "next" _ number:(Number)? _ timeUnit:TimeUnit {
+        n := int64(1)
+        if number != nil {
+            n = number.(int64)
+        }
+        t := timeUnit.(TimeUnit)
+
+        return TimeOffset{
+            Projection: ProjectionFuture,
+            TimeUnit: t,
+            Number: n,
+        }, nil
+    }
+    / "last" _ number:(Number)? _ timeUnit:TimeUnit {
+        n := int64(1)
+        if number != nil {
+            n = number.(int64)
+        }
+        t := timeUnit.(TimeUnit)
+
+        return TimeOffset{
+            Projection: ProjectionPast,
+            TimeUnit: t,
+            Number: n,
+        }, nil
+    }
+
+RelativeTime <- 
+    number:Number _ timeUnit:TimeUnit _ direction:OffsetDirection {
+        n := number.(int64)
+        t := timeUnit.(TimeUnit)
+        d := direction.(Projection)
+
+        return TimeOffset{
+            Projection: d,
+            TimeUnit: t,
+            Number: n,
+        }, nil
+    }
+
+Number <- 
+    [0-9]+ {
+        return strconv.ParseInt(string(c.text), 10, 64)
+    }
+
+TimeUnit <- 
+    SecondUnit {
+        return TimeUnitSecond, nil
+    }
+    / MinuteUnit {
+        return TimeUnitMinute, nil
+    }
+    / HourUnit {
+        return TimeUnitHour, nil
+    }
+    / DayUnit {
+        return TimeUnitDay, nil
+    }
+    / WeekUnit {
+        return TimeUnitWeek, nil
+    }
+    / MonthUnit {
+        return TimeUnitMonth, nil
+    }
+    / YearUnit {
+        return TimeUnitYear, nil
+    }
+
+SecondUnit <- "seconds" / "second" / "sec" / "s"
+MinuteUnit <- "minutes" / "minute" / "min" / "m"
+HourUnit <- "hours" / "hour" / "hr" / "h"
+DayUnit <- "days" / "day" / "d"
+WeekUnit <- "weeks" / "week" / "w"
+MonthUnit <- "months" / "month" / "M"
+YearUnit <- "years" / "year" / "y"
+OffsetDirection <- 
+    "ago" {
+        return ProjectionPast, nil  
+    } 
+    / "later" {
+        return ProjectionFuture, nil
+    }
+
+Timestamp <- Date "T" Time "Z"
+
+Date <- Year "-" Month "-" Day
+
+Year <- [0-9][0-9][0-9][0-9]
+
+Month <- [0-9][0-9]
+
+Day <- [0-9][0-9]
+
+Time <- Hour ":" Minute ":" Second
+
+Hour <- [0-9][0-9]
+
+Minute <- [0-9][0-9]
+
+Second <- [0-9][0-9]
+
+_ "whitespace" <- [ \t\n\r]*
+
+EOF <- !.
