@@ -66,7 +66,17 @@ func TestParse(t *testing.T) {
 			hasError: false,
 		},
 		{
+			input:    "6 minutes ago",
+			expected: time.Date(2021, 10, 10, 9, 54, 0, 0, time.UTC),
+			hasError: false,
+		},
+		{
 			input:    "24h ago",
+			expected: time.Date(2021, 10, 9, 10, 0, 0, 0, time.UTC),
+			hasError: false,
+		},
+		{
+			input:    "24 hours ago",
 			expected: time.Date(2021, 10, 9, 10, 0, 0, 0, time.UTC),
 			hasError: false,
 		},
@@ -81,12 +91,17 @@ func TestParse(t *testing.T) {
 			hasError: false,
 		},
 		{
+			input:    "6 months ago",
+			expected: time.Date(2021, 4, 10, 10, 0, 0, 0, time.UTC),
+			hasError: false,
+		},
+		{
 			input:    "6y ago",
 			expected: time.Date(2015, 10, 10, 10, 0, 0, 0, time.UTC),
 			hasError: false,
 		},
 		{
-			input:    "6y later",
+			input:    "6 years later",
 			expected: time.Date(2027, 10, 10, 10, 0, 0, 0, time.UTC),
 			hasError: false,
 		},
@@ -108,6 +123,11 @@ func TestParse(t *testing.T) {
 		{
 			input:    "last week",
 			expected: time.Date(2021, 10, 3, 10, 0, 0, 0, time.UTC),
+			hasError: false,
+		},
+		{
+			input:    "1h sooner",
+			expected: time.Date(2021, 10, 10, 9, 0, 0, 0, time.UTC),
 			hasError: false,
 		},
 		{
@@ -152,7 +172,7 @@ func FuzzParse(f *testing.F) {
 	}
 	f.Fuzz(func(t *testing.T, input string) {
 		result, err := parse(input, now)
-		if result != nil && err != nil {
+		if !result.IsZero() && err != nil {
 			t.Errorf("unexpected error for input %q: %v", input, err)
 		}
 	})

@@ -148,6 +148,9 @@ TimeUnit <-
     SecondUnit {
         return TimeUnitSecond, nil
     }
+    / MonthUnit {
+        return TimeUnitMonth, nil
+    }
     / MinuteUnit {
         return TimeUnitMinute, nil
     }
@@ -159,9 +162,6 @@ TimeUnit <-
     }
     / WeekUnit {
         return TimeUnitWeek, nil
-    }
-    / MonthUnit {
-        return TimeUnitMonth, nil
     }
     / YearUnit {
         return TimeUnitYear, nil
@@ -177,7 +177,10 @@ YearUnit <- "years" / "year" / "y"
 OffsetDirection <- 
     "ago" {
         return ProjectionPast, nil  
-    } 
+    }
+    / "sooner" {
+        return ProjectionPast, nil
+    }
     / "later" {
         return ProjectionFuture, nil
     }

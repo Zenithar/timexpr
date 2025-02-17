@@ -356,39 +356,39 @@ var g = &grammar{
 						run: (*parser).callonTimeUnit4,
 						expr: &ruleRefExpr{
 							pos:  position{line: 151, col: 7, offset: 3229},
+							name: "MonthUnit",
+						},
+					},
+					&actionExpr{
+						pos: position{line: 154, col: 7, offset: 3287},
+						run: (*parser).callonTimeUnit6,
+						expr: &ruleRefExpr{
+							pos:  position{line: 154, col: 7, offset: 3287},
 							name: "MinuteUnit",
 						},
 					},
 					&actionExpr{
-						pos: position{line: 154, col: 7, offset: 3289},
-						run: (*parser).callonTimeUnit6,
+						pos: position{line: 157, col: 7, offset: 3347},
+						run: (*parser).callonTimeUnit8,
 						expr: &ruleRefExpr{
-							pos:  position{line: 154, col: 7, offset: 3289},
+							pos:  position{line: 157, col: 7, offset: 3347},
 							name: "HourUnit",
 						},
 					},
 					&actionExpr{
-						pos: position{line: 157, col: 7, offset: 3345},
-						run: (*parser).callonTimeUnit8,
+						pos: position{line: 160, col: 7, offset: 3403},
+						run: (*parser).callonTimeUnit10,
 						expr: &ruleRefExpr{
-							pos:  position{line: 157, col: 7, offset: 3345},
+							pos:  position{line: 160, col: 7, offset: 3403},
 							name: "DayUnit",
 						},
 					},
 					&actionExpr{
-						pos: position{line: 160, col: 7, offset: 3399},
-						run: (*parser).callonTimeUnit10,
-						expr: &ruleRefExpr{
-							pos:  position{line: 160, col: 7, offset: 3399},
-							name: "WeekUnit",
-						},
-					},
-					&actionExpr{
-						pos: position{line: 163, col: 7, offset: 3455},
+						pos: position{line: 163, col: 7, offset: 3457},
 						run: (*parser).callonTimeUnit12,
 						expr: &ruleRefExpr{
-							pos:  position{line: 163, col: 7, offset: 3455},
-							name: "MonthUnit",
+							pos:  position{line: 163, col: 7, offset: 3457},
+							name: "WeekUnit",
 						},
 					},
 					&actionExpr{
@@ -626,10 +626,20 @@ var g = &grammar{
 						},
 					},
 					&actionExpr{
-						pos: position{line: 181, col: 7, offset: 3926},
+						pos: position{line: 181, col: 7, offset: 3925},
 						run: (*parser).callonOffsetDirection4,
 						expr: &litMatcher{
-							pos:        position{line: 181, col: 7, offset: 3926},
+							pos:        position{line: 181, col: 7, offset: 3925},
+							val:        "sooner",
+							ignoreCase: false,
+							want:       "\"sooner\"",
+						},
+					},
+					&actionExpr{
+						pos: position{line: 184, col: 7, offset: 3983},
+						run: (*parser).callonOffsetDirection6,
+						expr: &litMatcher{
+							pos:        position{line: 184, col: 7, offset: 3983},
 							val:        "later",
 							ignoreCase: false,
 							want:       "\"later\"",
@@ -640,26 +650,26 @@ var g = &grammar{
 		},
 		{
 			name: "Timestamp",
-			pos:  position{line: 185, col: 1, offset: 3980},
+			pos:  position{line: 188, col: 1, offset: 4037},
 			expr: &seqExpr{
-				pos: position{line: 185, col: 14, offset: 3993},
+				pos: position{line: 188, col: 14, offset: 4050},
 				exprs: []any{
 					&ruleRefExpr{
-						pos:  position{line: 185, col: 14, offset: 3993},
+						pos:  position{line: 188, col: 14, offset: 4050},
 						name: "Date",
 					},
 					&litMatcher{
-						pos:        position{line: 185, col: 19, offset: 3998},
+						pos:        position{line: 188, col: 19, offset: 4055},
 						val:        "T",
 						ignoreCase: false,
 						want:       "\"T\"",
 					},
 					&ruleRefExpr{
-						pos:  position{line: 185, col: 23, offset: 4002},
+						pos:  position{line: 188, col: 23, offset: 4059},
 						name: "Time",
 					},
 					&litMatcher{
-						pos:        position{line: 185, col: 28, offset: 4007},
+						pos:        position{line: 188, col: 28, offset: 4064},
 						val:        "Z",
 						ignoreCase: false,
 						want:       "\"Z\"",
@@ -669,32 +679,32 @@ var g = &grammar{
 		},
 		{
 			name: "Date",
-			pos:  position{line: 187, col: 1, offset: 4012},
+			pos:  position{line: 190, col: 1, offset: 4069},
 			expr: &seqExpr{
-				pos: position{line: 187, col: 9, offset: 4020},
+				pos: position{line: 190, col: 9, offset: 4077},
 				exprs: []any{
 					&ruleRefExpr{
-						pos:  position{line: 187, col: 9, offset: 4020},
+						pos:  position{line: 190, col: 9, offset: 4077},
 						name: "Year",
 					},
 					&litMatcher{
-						pos:        position{line: 187, col: 14, offset: 4025},
+						pos:        position{line: 190, col: 14, offset: 4082},
 						val:        "-",
 						ignoreCase: false,
 						want:       "\"-\"",
 					},
 					&ruleRefExpr{
-						pos:  position{line: 187, col: 18, offset: 4029},
+						pos:  position{line: 190, col: 18, offset: 4086},
 						name: "Month",
 					},
 					&litMatcher{
-						pos:        position{line: 187, col: 24, offset: 4035},
+						pos:        position{line: 190, col: 24, offset: 4092},
 						val:        "-",
 						ignoreCase: false,
 						want:       "\"-\"",
 					},
 					&ruleRefExpr{
-						pos:  position{line: 187, col: 28, offset: 4039},
+						pos:  position{line: 190, col: 28, offset: 4096},
 						name: "Day",
 					},
 				},
@@ -702,12 +712,12 @@ var g = &grammar{
 		},
 		{
 			name: "Year",
-			pos:  position{line: 189, col: 1, offset: 4044},
+			pos:  position{line: 192, col: 1, offset: 4101},
 			expr: &seqExpr{
-				pos: position{line: 189, col: 9, offset: 4052},
+				pos: position{line: 192, col: 9, offset: 4109},
 				exprs: []any{
 					&charClassMatcher{
-						pos:             position{line: 189, col: 9, offset: 4052},
+						pos:             position{line: 192, col: 9, offset: 4109},
 						val:             "[0-9]",
 						ranges:          []rune{'0', '9'},
 						basicLatinChars: [128]bool{false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, true, true, true, true, true, true, true, true, true, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
@@ -715,7 +725,7 @@ var g = &grammar{
 						inverted:        false,
 					},
 					&charClassMatcher{
-						pos:             position{line: 189, col: 14, offset: 4057},
+						pos:             position{line: 192, col: 14, offset: 4114},
 						val:             "[0-9]",
 						ranges:          []rune{'0', '9'},
 						basicLatinChars: [128]bool{false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, true, true, true, true, true, true, true, true, true, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
@@ -723,7 +733,7 @@ var g = &grammar{
 						inverted:        false,
 					},
 					&charClassMatcher{
-						pos:             position{line: 189, col: 19, offset: 4062},
+						pos:             position{line: 192, col: 19, offset: 4119},
 						val:             "[0-9]",
 						ranges:          []rune{'0', '9'},
 						basicLatinChars: [128]bool{false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, true, true, true, true, true, true, true, true, true, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
@@ -731,7 +741,7 @@ var g = &grammar{
 						inverted:        false,
 					},
 					&charClassMatcher{
-						pos:             position{line: 189, col: 24, offset: 4067},
+						pos:             position{line: 192, col: 24, offset: 4124},
 						val:             "[0-9]",
 						ranges:          []rune{'0', '9'},
 						basicLatinChars: [128]bool{false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, true, true, true, true, true, true, true, true, true, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
@@ -743,12 +753,12 @@ var g = &grammar{
 		},
 		{
 			name: "Month",
-			pos:  position{line: 191, col: 1, offset: 4074},
+			pos:  position{line: 194, col: 1, offset: 4131},
 			expr: &seqExpr{
-				pos: position{line: 191, col: 10, offset: 4083},
+				pos: position{line: 194, col: 10, offset: 4140},
 				exprs: []any{
 					&charClassMatcher{
-						pos:             position{line: 191, col: 10, offset: 4083},
+						pos:             position{line: 194, col: 10, offset: 4140},
 						val:             "[0-9]",
 						ranges:          []rune{'0', '9'},
 						basicLatinChars: [128]bool{false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, true, true, true, true, true, true, true, true, true, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
@@ -756,7 +766,7 @@ var g = &grammar{
 						inverted:        false,
 					},
 					&charClassMatcher{
-						pos:             position{line: 191, col: 15, offset: 4088},
+						pos:             position{line: 194, col: 15, offset: 4145},
 						val:             "[0-9]",
 						ranges:          []rune{'0', '9'},
 						basicLatinChars: [128]bool{false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, true, true, true, true, true, true, true, true, true, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
@@ -768,12 +778,12 @@ var g = &grammar{
 		},
 		{
 			name: "Day",
-			pos:  position{line: 193, col: 1, offset: 4095},
+			pos:  position{line: 196, col: 1, offset: 4152},
 			expr: &seqExpr{
-				pos: position{line: 193, col: 8, offset: 4102},
+				pos: position{line: 196, col: 8, offset: 4159},
 				exprs: []any{
 					&charClassMatcher{
-						pos:             position{line: 193, col: 8, offset: 4102},
+						pos:             position{line: 196, col: 8, offset: 4159},
 						val:             "[0-9]",
 						ranges:          []rune{'0', '9'},
 						basicLatinChars: [128]bool{false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, true, true, true, true, true, true, true, true, true, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
@@ -781,7 +791,7 @@ var g = &grammar{
 						inverted:        false,
 					},
 					&charClassMatcher{
-						pos:             position{line: 193, col: 13, offset: 4107},
+						pos:             position{line: 196, col: 13, offset: 4164},
 						val:             "[0-9]",
 						ranges:          []rune{'0', '9'},
 						basicLatinChars: [128]bool{false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, true, true, true, true, true, true, true, true, true, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
@@ -793,32 +803,32 @@ var g = &grammar{
 		},
 		{
 			name: "Time",
-			pos:  position{line: 195, col: 1, offset: 4114},
+			pos:  position{line: 198, col: 1, offset: 4171},
 			expr: &seqExpr{
-				pos: position{line: 195, col: 9, offset: 4122},
+				pos: position{line: 198, col: 9, offset: 4179},
 				exprs: []any{
 					&ruleRefExpr{
-						pos:  position{line: 195, col: 9, offset: 4122},
+						pos:  position{line: 198, col: 9, offset: 4179},
 						name: "Hour",
 					},
 					&litMatcher{
-						pos:        position{line: 195, col: 14, offset: 4127},
+						pos:        position{line: 198, col: 14, offset: 4184},
 						val:        ":",
 						ignoreCase: false,
 						want:       "\":\"",
 					},
 					&ruleRefExpr{
-						pos:  position{line: 195, col: 18, offset: 4131},
+						pos:  position{line: 198, col: 18, offset: 4188},
 						name: "Minute",
 					},
 					&litMatcher{
-						pos:        position{line: 195, col: 25, offset: 4138},
+						pos:        position{line: 198, col: 25, offset: 4195},
 						val:        ":",
 						ignoreCase: false,
 						want:       "\":\"",
 					},
 					&ruleRefExpr{
-						pos:  position{line: 195, col: 29, offset: 4142},
+						pos:  position{line: 198, col: 29, offset: 4199},
 						name: "Second",
 					},
 				},
@@ -826,12 +836,12 @@ var g = &grammar{
 		},
 		{
 			name: "Hour",
-			pos:  position{line: 197, col: 1, offset: 4150},
+			pos:  position{line: 200, col: 1, offset: 4207},
 			expr: &seqExpr{
-				pos: position{line: 197, col: 9, offset: 4158},
+				pos: position{line: 200, col: 9, offset: 4215},
 				exprs: []any{
 					&charClassMatcher{
-						pos:             position{line: 197, col: 9, offset: 4158},
+						pos:             position{line: 200, col: 9, offset: 4215},
 						val:             "[0-9]",
 						ranges:          []rune{'0', '9'},
 						basicLatinChars: [128]bool{false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, true, true, true, true, true, true, true, true, true, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
@@ -839,7 +849,7 @@ var g = &grammar{
 						inverted:        false,
 					},
 					&charClassMatcher{
-						pos:             position{line: 197, col: 14, offset: 4163},
+						pos:             position{line: 200, col: 14, offset: 4220},
 						val:             "[0-9]",
 						ranges:          []rune{'0', '9'},
 						basicLatinChars: [128]bool{false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, true, true, true, true, true, true, true, true, true, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
@@ -851,12 +861,12 @@ var g = &grammar{
 		},
 		{
 			name: "Minute",
-			pos:  position{line: 199, col: 1, offset: 4170},
+			pos:  position{line: 202, col: 1, offset: 4227},
 			expr: &seqExpr{
-				pos: position{line: 199, col: 11, offset: 4180},
+				pos: position{line: 202, col: 11, offset: 4237},
 				exprs: []any{
 					&charClassMatcher{
-						pos:             position{line: 199, col: 11, offset: 4180},
+						pos:             position{line: 202, col: 11, offset: 4237},
 						val:             "[0-9]",
 						ranges:          []rune{'0', '9'},
 						basicLatinChars: [128]bool{false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, true, true, true, true, true, true, true, true, true, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
@@ -864,7 +874,7 @@ var g = &grammar{
 						inverted:        false,
 					},
 					&charClassMatcher{
-						pos:             position{line: 199, col: 16, offset: 4185},
+						pos:             position{line: 202, col: 16, offset: 4242},
 						val:             "[0-9]",
 						ranges:          []rune{'0', '9'},
 						basicLatinChars: [128]bool{false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, true, true, true, true, true, true, true, true, true, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
@@ -876,12 +886,12 @@ var g = &grammar{
 		},
 		{
 			name: "Second",
-			pos:  position{line: 201, col: 1, offset: 4192},
+			pos:  position{line: 204, col: 1, offset: 4249},
 			expr: &seqExpr{
-				pos: position{line: 201, col: 11, offset: 4202},
+				pos: position{line: 204, col: 11, offset: 4259},
 				exprs: []any{
 					&charClassMatcher{
-						pos:             position{line: 201, col: 11, offset: 4202},
+						pos:             position{line: 204, col: 11, offset: 4259},
 						val:             "[0-9]",
 						ranges:          []rune{'0', '9'},
 						basicLatinChars: [128]bool{false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, true, true, true, true, true, true, true, true, true, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
@@ -889,7 +899,7 @@ var g = &grammar{
 						inverted:        false,
 					},
 					&charClassMatcher{
-						pos:             position{line: 201, col: 16, offset: 4207},
+						pos:             position{line: 204, col: 16, offset: 4264},
 						val:             "[0-9]",
 						ranges:          []rune{'0', '9'},
 						basicLatinChars: [128]bool{false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, true, true, true, true, true, true, true, true, true, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
@@ -902,11 +912,11 @@ var g = &grammar{
 		{
 			name:        "_",
 			displayName: "\"whitespace\"",
-			pos:         position{line: 203, col: 1, offset: 4214},
+			pos:         position{line: 206, col: 1, offset: 4271},
 			expr: &zeroOrMoreExpr{
-				pos: position{line: 203, col: 19, offset: 4232},
+				pos: position{line: 206, col: 19, offset: 4289},
 				expr: &charClassMatcher{
-					pos:             position{line: 203, col: 19, offset: 4232},
+					pos:             position{line: 206, col: 19, offset: 4289},
 					val:             "[ \\t\\n\\r]",
 					chars:           []rune{' ', '\t', '\n', '\r'},
 					basicLatinChars: [128]bool{false, false, false, false, false, false, false, false, false, true, true, false, false, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
@@ -917,11 +927,11 @@ var g = &grammar{
 		},
 		{
 			name: "EOF",
-			pos:  position{line: 205, col: 1, offset: 4244},
+			pos:  position{line: 208, col: 1, offset: 4301},
 			expr: &notExpr{
-				pos: position{line: 205, col: 8, offset: 4251},
+				pos: position{line: 208, col: 8, offset: 4308},
 				expr: &anyMatcher{
-					line: 205, col: 9, offset: 4252,
+					line: 208, col: 9, offset: 4309,
 				},
 			},
 		},
@@ -1090,7 +1100,7 @@ func (p *parser) callonTimeUnit2() (any, error) {
 }
 
 func (c *current) onTimeUnit4() (any, error) {
-	return TimeUnitMinute, nil
+	return TimeUnitMonth, nil
 
 }
 
@@ -1101,7 +1111,7 @@ func (p *parser) callonTimeUnit4() (any, error) {
 }
 
 func (c *current) onTimeUnit6() (any, error) {
-	return TimeUnitHour, nil
+	return TimeUnitMinute, nil
 
 }
 
@@ -1112,7 +1122,7 @@ func (p *parser) callonTimeUnit6() (any, error) {
 }
 
 func (c *current) onTimeUnit8() (any, error) {
-	return TimeUnitDay, nil
+	return TimeUnitHour, nil
 
 }
 
@@ -1123,7 +1133,7 @@ func (p *parser) callonTimeUnit8() (any, error) {
 }
 
 func (c *current) onTimeUnit10() (any, error) {
-	return TimeUnitWeek, nil
+	return TimeUnitDay, nil
 
 }
 
@@ -1134,7 +1144,7 @@ func (p *parser) callonTimeUnit10() (any, error) {
 }
 
 func (c *current) onTimeUnit12() (any, error) {
-	return TimeUnitMonth, nil
+	return TimeUnitWeek, nil
 
 }
 
@@ -1167,7 +1177,7 @@ func (p *parser) callonOffsetDirection2() (any, error) {
 }
 
 func (c *current) onOffsetDirection4() (any, error) {
-	return ProjectionFuture, nil
+	return ProjectionPast, nil
 
 }
 
@@ -1175,6 +1185,17 @@ func (p *parser) callonOffsetDirection4() (any, error) {
 	stack := p.vstack[len(p.vstack)-1]
 	_ = stack
 	return p.cur.onOffsetDirection4()
+}
+
+func (c *current) onOffsetDirection6() (any, error) {
+	return ProjectionFuture, nil
+
+}
+
+func (p *parser) callonOffsetDirection6() (any, error) {
+	stack := p.vstack[len(p.vstack)-1]
+	_ = stack
+	return p.cur.onOffsetDirection6()
 }
 
 var (

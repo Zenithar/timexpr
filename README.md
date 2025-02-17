@@ -37,7 +37,7 @@ The following expressions are supported:
 - `yesterday`: returns the current time - 1 day
 - `next (NUMBER)? UNIT`: returns the current time + NUMBER UNIT 
 - `last (NUMBER)? UNIT`: returns the crrent time - NUMBER UNIT
-- `NUMBER UNIT (ago|later)` : returns the reference time - NUMBER UNIT
+- `NUMBER UNIT (ago|later|sooner)` : returns the reference time - NUMBER UNIT
 
 Where `UNIT` can be one of the following:
 
